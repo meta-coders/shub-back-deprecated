@@ -3,8 +3,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const login = require('./modules/login.js');
 const api = require('.modules/api.js');
+const login = require('./modules/login.js');
 
 const app = express();
 

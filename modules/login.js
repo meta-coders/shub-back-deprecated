@@ -16,7 +16,7 @@ login.use(bodyParser.urlencoded({
 login.post('/login', (req, res) => {
   const login = req.body.login;
   const password = req.body.password;
-  dbApi.do().authenticate(login, password, (err, sessionId) => {
+  dbApi.authenticate(login, password, (err, sessionId) => {
     if (err) {
       res.sendStatus(500);
       global.log.error(err);
@@ -24,13 +24,13 @@ login.post('/login', (req, res) => {
     }
 
     if (sessionId) res.json({ sessionId });
-    else res.sendStatus(403);
+    else res.sendStatus(401);
   });
 });
 
 login.post('/logout', (req, res) => {
   const sessionId = req.body.sessionId;
-  dbApi.do().clearSession(sessionId, (err) => {
+  dbApi.clearSession(sessionId, (err) => {
     if (err) {
       res.sendStatus(500);
       global.log.error(err);
