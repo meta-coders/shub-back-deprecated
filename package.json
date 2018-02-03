@@ -1,0 +1,27 @@
+{
+  "name": "shub-back",
+  "version": "0.1.0",
+  "description": "StudyHub backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "eslint",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meta-coders/shub-back.git"
+  },
+  "keywords": [
+    "study",
+    "school"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meta-coders/shub-back/issues"
+  },
+  "homepage": "https://github.com/meta-coders/shub-back#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
