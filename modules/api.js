@@ -15,6 +15,7 @@ dbApi.init();
 api.post('/:fn', (req, res) => {
   const fn = req.params.fn;
   const body = req.body;
+  console.log(fn);
   dbApi[fn](body, (err, data) => {
     if (err) {
       res.sendStatus(500);
