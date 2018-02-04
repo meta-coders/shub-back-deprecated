@@ -15,22 +15,29 @@ admin.use(bodyParser.urlencoded({
   extended: true
 }));
 
-admin.use('/uploadSchedule', (req, res, next) => {
+admin.use('/:uploadTarget', (req, res, next) => {
   const sessionId = req.body.sessionId;
   dbApi.checkSession(sessionId, (err, userId) => {
     if (userId) next();
     else res.sendStatus(401);
   });
 });
-
-admin.use('/uploadTimetable', (req, res, next) => {
-  const sessionId = req.body.sessionId;
-  dbApi.checkSession(sessionId, (err, userId) => {
-    if (userId) next();
-    else res.sendStatus(401);
-  });
-});
-
+//
+// admin.use('/uploadTimetable', (req, res, next) => {
+//   const sessionId = req.body.sessionId;
+//   dbApi.checkSession(sessionId, (err, userId) => {
+//     if (userId) next();
+//     else res.sendStatus(401);
+//   });
+// });
+//
+// admin.use('/uploadClass', (req, res, next) => {
+//   const sessionId = req.body.sessionId;
+//   dbApi.checkSession(sessionId, (err, userId) => {
+//     if (userId) next();
+//     else res.sendStatus(401);
+//   });
+// });
 
 admin.post('/uploadSchedule', (req, res) => {
   const file = req.files.table;
@@ -42,6 +49,12 @@ admin.post('/uploadSchedule', (req, res) => {
 admin.post('/uploadTimetable', (req, res) => {
   const file = req.files.table;
   csv.insertTimetable(file.data);
+  res.sendStatus(200);
+});
+
+admin.post('/uploadClass', (req, res) => {
+  const file = req.files.table;
+  csv.insertStudents(file.data);
   res.sendStatus(200);
 });
 
