@@ -38,3 +38,12 @@ admin.post('/uploadSchedule', (req, res) => {
   csv.insertSchedule(className, file.data);
   res.sendStatus(200);
 });
+
+admin.post('/uploadTimetable', (req, res) => {
+  const file = req.files.table;
+  csv.insertTimetable(file.data);
+  res.sendStatus(200);
+});
+
+
+module.exports = admin;
