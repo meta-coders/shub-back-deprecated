@@ -27,20 +27,33 @@ admin.use('/:uploadTarget', (req, res, next) => {
 admin.post('/uploadSchedule', (req, res) => {
   const file = req.files.table;
   const className = req.body.className;
-  csv.insertSchedule(className, file.data);
-  res.sendStatus(200);
+  csv.insertSchedule(className, file.data, (length1) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    res.json({
+      className,
+      length1
+    });
+  });
 });
 
 admin.post('/uploadTimetable', (req, res) => {
   const file = req.files.table;
-  csv.insertTimetable(file.data);
-  res.sendStatus(200);
+  csv.insertTimetable(file.data, (length1) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    res.json({ length1 });
+  });
 });
 
 admin.post('/uploadClass', (req, res) => {
   const file = req.files.table;
-  csv.insertStudents(file.data);
-  res.sendStatus(200);
+  const className = req.body.className;
+  csv.insertStudents(className, file.data, (length1) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    res.sendStatus({
+      className,
+      length1
+    });
+  });
 });
 
 
