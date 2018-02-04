@@ -1,13 +1,13 @@
--- MySQL dump 10.16  Distrib 10.1.30-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.16  Distrib 10.2.10-MariaDB, for Linux (x86_64)
 --
 -- Host: localhost    Database: shub
 -- ------------------------------------------------------
--- Server version	10.1.30-MariaDB-0ubuntu0.17.10.1
+-- Server version	10.2.10-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -26,7 +26,7 @@ CREATE TABLE `classes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,8 +35,93 @@ CREATE TABLE `classes` (
 
 LOCK TABLES `classes` WRITE;
 /*!40000 ALTER TABLE `classes` DISABLE KEYS */;
-INSERT INTO `classes` VALUES (1,'11-A');
+INSERT INTO `classes` VALUES (1,'11-A'),(2,'11-Б');
 /*!40000 ALTER TABLE `classes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `events`
+--
+
+DROP TABLE IF EXISTS `events`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `description` text NOT NULL,
+  `class_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `class_id` (`class_id`),
+  CONSTRAINT `events_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `classes` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `events`
+--
+
+LOCK TABLES `events` WRITE;
+/*!40000 ALTER TABLE `events` DISABLE KEYS */;
+/*!40000 ALTER TABLE `events` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `homework`
+--
+
+DROP TABLE IF EXISTS `homework`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `homework` (
+  `id` int(11) NOT NULL,
+  `lesson_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lesson_id` (`lesson_id`),
+  KEY `class_id` (`class_id`),
+  CONSTRAINT `homework_ibfk_1` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`),
+  CONSTRAINT `homework_ibfk_2` FOREIGN KEY (`class_id`) REFERENCES `classes` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `homework`
+--
+
+LOCK TABLES `homework` WRITE;
+/*!40000 ALTER TABLE `homework` DISABLE KEYS */;
+INSERT INTO `homework` VALUES (1,1,1,'lorem integer tincidunt ante'),(2,4,1,'auctor sed tristique in tempus'),(3,7,1,'proin interdum mauris'),(4,10,1,'non pretium quis'),(5,13,1,'id lobortis'),(6,16,1,'quis orci nullam'),(7,19,1,'sollicitudin mi'),(8,22,1,'at velit eu est congue'),(9,25,1,'est quam pharetra magna'),(10,28,1,'lobortis ligula');
+/*!40000 ALTER TABLE `homework` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `lessons`
+--
+
+DROP TABLE IF EXISTS `lessons`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `lessons` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `schedule_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `type` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `schedule_id` (`schedule_id`),
+  CONSTRAINT `lessons_ibfk_1` FOREIGN KEY (`schedule_id`) REFERENCES `schedule` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `lessons`
+--
+
+LOCK TABLES `lessons` WRITE;
+/*!40000 ALTER TABLE `lessons` DISABLE KEYS */;
+INSERT INTO `lessons` VALUES (1,1,'2018-02-08','lesson'),(2,2,'2018-02-05','lesson'),(3,3,'2018-02-06','exam'),(4,4,'2018-02-07','exam'),(5,5,'2018-02-09','exam'),(6,6,'2018-02-07','exam'),(7,7,'2018-02-06','lesson'),(8,8,'2018-02-09','exam'),(9,9,'2018-02-07','exam'),(10,10,'2018-02-06','exam'),(11,11,'2018-02-08','exam'),(12,12,'2018-02-05','lesson'),(13,13,'2018-02-07','exam'),(14,14,'2018-02-06','lesson'),(15,15,'2018-02-08','lesson'),(16,16,'2018-02-07','lesson'),(17,17,'2018-02-07','lesson'),(18,18,'2018-02-06','lesson'),(19,19,'2018-02-06','exam'),(20,20,'2018-02-08','exam'),(21,21,'2018-02-07','lesson'),(22,22,'2018-02-05','lesson'),(23,23,'2018-02-06','exam'),(24,24,'2018-02-05','lesson'),(25,25,'2018-02-09','lesson'),(26,26,'2018-02-05','exam'),(27,27,'2018-02-07','exam'),(28,28,'2018-02-07','exam'),(29,29,'2018-02-08','lesson'),(30,30,'2018-02-09','lesson'),(31,31,'2018-02-05','exam'),(32,32,'2018-02-06','exam'),(33,33,'2018-02-09','lesson'),(34,34,'2018-02-07','exam'),(35,35,'2018-02-05','exam'),(36,36,'2018-02-09','exam'),(37,37,'2018-02-07','lesson'),(38,38,'2018-02-09','lesson'),(39,39,'2018-02-08','lesson'),(40,40,'2018-02-07','exam'),(41,41,'2018-02-07','lesson'),(42,42,'2018-02-06','lesson');
+/*!40000 ALTER TABLE `lessons` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -59,7 +144,7 @@ CREATE TABLE `schedule` (
   KEY `teacher_id` (`teacher_id`),
   CONSTRAINT `schedule_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `classes` (`id`),
   CONSTRAINT `schedule_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +177,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES (2,'2a0cc851eb3ef883c56af2fb766d3dc8');
+INSERT INTO `sessions` VALUES (1,'699b8469cf9c96b10f54068a827e9c0d');
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,7 +219,7 @@ CREATE TABLE `teachers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +228,7 @@ CREATE TABLE `teachers` (
 
 LOCK TABLES `teachers` WRITE;
 /*!40000 ALTER TABLE `teachers` DISABLE KEYS */;
-INSERT INTO `teachers` VALUES (1,'Петровіч О.В.'),(2,'Генадівнічівна І.І.'),(3,'Довгополючка Р.Р.'),(4,'Кувічка М.Е.'),(5,'Мачехін М.М.'),(6,'Фізрук Е.Ю.'),(7,'Шевчук Х.Т.');
+INSERT INTO `teachers` VALUES (1,'Петровіч О.В.'),(2,'Генадівнічівна І.І.'),(3,'Довгополючка Р.Р.'),(4,'Кувічка М.Е.'),(5,'Мачехін М.М.'),(6,'Фізрук Е.Ю.'),(7,'Шевчук Х.Т.'),(14,'Перподперепрепод Щ.Ы.'),(15,'Петардовна Б.Л.');
 /*!40000 ALTER TABLE `teachers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +244,7 @@ CREATE TABLE `timetable` (
   `start` time NOT NULL,
   `end` time NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +253,7 @@ CREATE TABLE `timetable` (
 
 LOCK TABLES `timetable` WRITE;
 /*!40000 ALTER TABLE `timetable` DISABLE KEYS */;
-INSERT INTO `timetable` VALUES (1,'08:00:00','08:45:00'),(2,'08:55:00','09:40:00'),(3,'09:50:00','10:35:00'),(4,'10:55:00','11:40:00'),(5,'11:50:00','12:35:00'),(6,'12:45:00','13:30:00'),(7,'13:50:00','14:35:00'),(8,'14:45:00','15:30:00'),(9,'15:40:00','16:25:00'),(10,'16:45:00','17:30:00');
+INSERT INTO `timetable` VALUES (43,'08:00:00','08:45:00'),(44,'08:55:00','09:40:00'),(45,'09:50:00','10:35:00'),(46,'10:55:00','11:40:00'),(47,'11:55:00','12:30:00'),(48,'12:45:00','13:30:00'),(49,'13:50:00','14:35:00'),(50,'14:45:00','15:30:00'),(51,'16:15:00','16:25:00'),(52,'16:45:00','17:30:00');
 /*!40000 ALTER TABLE `timetable` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +271,7 @@ CREATE TABLE `users` (
   `role` varchar(255) NOT NULL,
   `profile_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +280,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'dima','0f5b25cd58319cde0e6e33715b66db4c','student',3);
+INSERT INTO `users` VALUES (1,'dima','0f5b25cd58319cde0e6e33715b66db4c','students',3),(2,'front','8dedb8f8bab3f048fbb548fbdcc796c0','students',6);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -208,4 +293,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-03 19:21:18
+-- Dump completed on 2018-02-04  4:33:59

@@ -11,6 +11,7 @@ api.use(bodyParser.urlencoded({
 }));
 
 dbApi.init();
+api.get('/:fn', (req, res) => res.send(req.params.fn));
 
 api.post('/:fn', (req, res) => {
   const fn = req.params.fn;
@@ -19,7 +20,7 @@ api.post('/:fn', (req, res) => {
   dbApi[fn](body, (err, data) => {
     if (err) {
       res.sendStatus(500);
-      global.log(err);
+      global.log.error(err);
     } else if (!data) {
       res.sendStatus(401);
     } else {
