@@ -1,0 +1,11 @@
+Sun, 04 Feb 2018 03:02:16 GMT: ER_NON_UNIQ_ERROR: Column 'class_id' in where clause is ambiguous
+Sun, 04 Feb 2018 03:02:26 GMT: ER_NON_UNIQ_ERROR: Column 'class_id' in where clause is ambiguous
+Sun, 04 Feb 2018 03:12:23 GMT: undefined
+Sun, 04 Feb 2018 05:48:57 GMT: ER_DUP_ENTRY: Duplicate entry '2' for key 'user_id'
+Sun, 04 Feb 2018 05:49:26 GMT: ER_DUP_ENTRY: Duplicate entry '1' for key 'user_id'
+Sun, 04 Feb 2018 05:49:38 GMT: ER_DUP_ENTRY: Duplicate entry '2' for key 'user_id'
+Sun, 04 Feb 2018 05:49:39 GMT: ER_DUP_ENTRY: Duplicate entry '1' for key 'user_id'
+Sun, 04 Feb 2018 05:49:41 GMT: ER_DUP_ENTRY: Duplicate entry '1' for key 'user_id'
+Sun, 04 Feb 2018 05:50:07 GMT: ER_DUP_ENTRY: Duplicate entry '1' for key 'user_id'
+Sun, 04 Feb 2018 05:58:53 GMT: ER_DUP_ENTRY: Duplicate entry '1' for key 'user_id'
+Sun, 04 Feb 2018 06:46:31 GMT: ER_DUP_ENTRY: Duplicate entry '1' for key 'user_id'

@@ -22,22 +22,7 @@ admin.use('/:uploadTarget', (req, res, next) => {
     else res.sendStatus(401);
   });
 });
-//
-// admin.use('/uploadTimetable', (req, res, next) => {
-//   const sessionId = req.body.sessionId;
-//   dbApi.checkSession(sessionId, (err, userId) => {
-//     if (userId) next();
-//     else res.sendStatus(401);
-//   });
-// });
-//
-// admin.use('/uploadClass', (req, res, next) => {
-//   const sessionId = req.body.sessionId;
-//   dbApi.checkSession(sessionId, (err, userId) => {
-//     if (userId) next();
-//     else res.sendStatus(401);
-//   });
-// });
+
 
 admin.post('/uploadSchedule', (req, res) => {
   const file = req.files.table;
