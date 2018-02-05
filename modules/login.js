@@ -14,7 +14,6 @@ login.use(bodyParser.urlencoded({
 
 
 login.post('/login', (req, res) => {
-  console.log('login');
   const login = req.body.login;
   const password = req.body.password;
   dbApi.authenticate(login, password, (err, sessionId) => {
@@ -30,7 +29,6 @@ login.post('/login', (req, res) => {
 });
 
 login.post('/logout', (req, res) => {
-  console.log('logout');
   const sessionId = req.body.sessionId;
   dbApi.clearSession(sessionId, (err) => {
     if (err) {
