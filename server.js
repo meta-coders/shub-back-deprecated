@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use('/', login);
+app.use('/auth', login);
 app.use('/api', api);
 app.use('/admin', admin);
 
