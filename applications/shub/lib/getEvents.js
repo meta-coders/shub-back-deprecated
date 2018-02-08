@@ -1,10 +1,12 @@
 api.getEvents = function(data, callback) {
   const options = {
+    query: '*',
     table: 'events',
-    search: `class_id=${data.classId}`
+    search: `class_id=${data.classId}`,
+    from: true
   };
 
-  api.db.mysql.query(options, (err, result) => {
+  this.db.mysql.query(options, (err, result) => {
     if (err) {
       application.log.error(err);
       return;
@@ -12,4 +14,4 @@ api.getEvents = function(data, callback) {
 
     callback(result);
   });
-}
+};

@@ -4,7 +4,8 @@ api.getTimetable = function(callback) {
 
   const options = {
     query: `id, ${start}, ${end}`,
-    table: 'timetable'
+    table: 'timetable',
+    from: true
   };
 
   api.db.mysql.query(options, (err, result) => {
@@ -15,4 +16,4 @@ api.getTimetable = function(callback) {
 
     callback(result);
   });
-}
+};

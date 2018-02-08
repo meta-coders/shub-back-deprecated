@@ -4,7 +4,8 @@ api.getSchedule = function(data, callback) {
     query: 'schedule.weekday, schedule.lesson, schedule.subject,' +
            ' schedule.cabinet, teachers.name AS teacher_name',
     join: 'LEFT JOIN teachers ON teachers.id=schedule.teacher_id',
-    search: `class_id=${data.classId}`
+    search: `class_id=${data.classId}`,
+    from: true
   };
 
   api.db.mysql.query(options, (err, schedule) => {
@@ -17,4 +18,4 @@ api.getSchedule = function(data, callback) {
       callback({ schedule, timetable });
     });
   });
-}
+};
